@@ -1,0 +1,185 @@
+---
+title: "Heterozygosity and $F_{st}$ for admixed populations"
+author: "Guangchuan Ji"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Heterozygosity and $F_{st}$ for admixed populations}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r echo=TRUE, message=FALSE, warning=FALSE, fig.cap=TRUE}
+knitr::opts_chunk$set(echo = TRUE, comment = NA)
+```
+
+```{r}
+library(knitr)
+library(kableExtra)
+```
+
+## Function to calculate the heterozygosity of a population at a locus
+
+A diploid organism is heterozygous at a gene locus when its cells contain two different alleles of a gene. The cell or organism is called a heterozygote specifically for the allele in question, and therefore, heterozygosity refers to a specific genotype. High heterozygosity means lots of genetic variability. Low heterozygosity means little genetic variability.
+
+We can use the expected heterozygosity to estimate the gene diversity. The expected heterozygosity in a population for a given locus with I distinct alleles is defined as $H = 1 - \sum_{i=1}^I p_{i}^2$, where $p_{i}$ is the frequency of allele i.
+
+To calculate the expected heterozygosity, we can use the code below:
+
+```{r}
+get.het <- function(allele.freq)
+{
+1 - sum(allele.freq^2)
+}
+```
+
+The input is the vector of allele ferquencies (should add up to 1).
+
+### Example
+If we have three allele frequencies: 0.2, 0.3, 0.5
+
+First check the allele frequencies add up to 1:
+```{r}
+sum(0.2, 0.3, 0.5)
+```
+
+And now we check the missing data NA:
+```{r}
+is.na(c(0.2, 0.3, 0.5))
+```
+
+Then the expected heterozygosity is:
+```{r}
+get.het(c(0.2, 0.3, 0.5))
+```
+
+## Function to calculate $F_{st}$ for pop.1 and pop.2
+
+The "fixation index" $F_{st}$ is a measure of genetic divergence between an admixed population and its parental source populations. $F_{st}$ can be defined as $F_{st}$ = ($H_t$ - $H_s$)/H, where $H_t$ is the expected heterozygosity of the overall population, and $H_s$ is the mean expected heterozygosity across subpopulations.  
+
+To calculate $F_{st}$, we can use the codes below:
+
+```{r}
+get.Fst <- function(pop.1, pop.2)
+{
+  meta.pop <- (pop.1 + pop.2)/2
+  Ht <- get.het(meta.pop)
+  Hs <- mean(c(get.het(pop.1), get.het(pop.2)))
+  Fst <- (Ht - Hs)/Ht
+  Fst
+}
+```
+
+The input is pop.1, pop.2 (allele frequencies for the same locus for populations 1 and 2).
+
+### Example
+If we know the allele frequency of pop.1 is 0.3, and the allele frequency of pop.2 is 0.4.
+
+First we check the missing data NA:
+```{r}
+is.na(c(0.3, 0.4))
+```
+
+Then we can get the $F_{st}$:
+```{r}
+get.Fst(0.3, 0.4)
+```
+
+## Function to calculate $F_{st}$ between a founder population and the admixed population for the K=2 founder population case
+
+In the following sections, we try to calculate the $F_{st}$ between a founder population and the admixed population.
+
+First, we consider a special case in which only 2 fouding populations give rise to an admixed population. And we use $\gamma_k$ to present the admixture fraction corresponding to population k. 
+
+For the K = 2 founder population case, we can use the codes below to calculate $F_{st}$ between pop.1 and the admixed population:
+
+```{r}
+get.Fst.admix <- function(pop.1, pop.2, gamma)
+{
+  pop.3 <- gamma*pop.1 + (1 - gamma)*pop.2
+  meta.pop <- (pop.1 + pop.3)/2
+  Ht <- get.het(meta.pop)
+  Hs <- mean(c(get.het(pop.1), get.het(pop.3)))
+  Fst <- (Ht - Hs)/Ht
+  Fst
+}
+```
+
+The input is pop.1, pop.2, gamma (gamma is the ancestry fraction corresponding to population 1).
+
+### Example
+Now we still consider the allele frequency of pop.1 is 0.3, and the allele frequency of pop.2 is 0.4, and fraction $\gamma_k$ = 0.25. 
+
+First we check the missing data NA:
+```{r}
+is.na(c(0.3, 0.4, 0.25))
+```
+
+Then we can get $F_{st}$ between pop.1 and the admixed population:
+
+```{r}
+get.Fst.admix(0.3, 0.4, 0.25)
+```
+
+## Function to calculate $F_{st}$ for pop.1 and admixed population for the general case of K founding population
+
+In this section, we consider the general case in which K founding populations give rise to an admixed population. Without loss of generality, we investigate $F_{st}$ between population 1 and the admixed population. And we use the codes below to get this $F_{st}$ value:
+
+```{r}
+get.Fst.admix.general <- function(pops, gamma)
+{
+  ##get admixed population
+  admix.pop <- t(pops) %*% gamma
+  
+  ##get allele frequencies of "meta-population"
+  meta.pop <- (pops[1, ] + admix.pop)/2
+  
+  Ht <- get.het(meta.pop)
+  Hs <- mean(c(get.het(pops[1, ]), get.het(admix.pop)))
+  Fst <- (Ht - Hs)/Ht
+  Fst
+}
+```
+
+The input is a matrix with K rows and I columns (sums on rows is 1), vector of gammas (add up to 1).
+
+### Example
+
+We have the data in a matrix, where each row represents a founder population and each column an allele for the locus of interest.
+```{r results='asis'}
+pops <- matrix(nrow = 2, ncol = 10, c(0.059, 0.153, 0.132, 0.101, 0.08, 0.055, 0.106, 0.145, 0.048, 0.121, 1.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000), byrow=TRUE)
+```
+
+This is what the data looks like:
+```{r echo=TRUE}
+class(pops)
+rownames(pops) <- c("pop1", "pop2")
+colnames(pops) <- paste("Allele",1:ncol(pops))
+pops %>% 
+    kable() %>%
+    kable_styling()
+```
+
+First check that the allele frequencies add up to 1:
+```{r echo=TRUE}
+rowSums(pops)
+```
+
+Now also consider the following admixture proportions for each population:
+```{r echo=TRUE}
+gamma <- c(0.3, 0.7)
+sum(gamma)
+```
+
+Then check the missing data NA:
+```{r}
+is.na(pops)
+is.na(gamma)
+```
+
+Now calculate the $F_{st}$ between population 1 and the admixed population: 
+```{r echo=TRUE}
+get.Fst.admix.general(pops, gamma)
+```
+
+
