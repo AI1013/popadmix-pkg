@@ -9,8 +9,13 @@
 #' @return The list should include allele frequencies of three populations.
 #' @export plot_HorF
 #' @importFrom stats na.omit
-#' @import ggplot2
 #' @import ggtern
+#' @importFrom ggplot2 scale_colour_manual
+#' @importFrom ggplot2 geom_point
+#' @importFrom ggplot2 element_text
+#' @importFrom ggplot2 guides
+#' @importFrom stats quantile
+#' @importFrom ggplot2 guide_legend
 #' @import RColorBrewer
 #' @examples
 #' plot_HorF("D2S1399", y="Hadm")

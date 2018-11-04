@@ -4,7 +4,6 @@
 #' populations(Europe, America, Africa, Latino) of different alleles at this locus.
 #' @references Boca, S. M., & Rosenberg, N. A. (2011). Mathematical properties of Fst between admixed populations 
 #' and their parental source populations. Theoretical population biology, 80(3), 208-216.
-
 "allele.frequencies.no.extra"
 
 
@@ -14,5 +13,4 @@
 #' alleles of four populations(Europe, America, Africa, Latino) at this locus.
 #' @references Boca, S. M., & Rosenberg, N. A. (2011). Mathematical properties of Fst between admixed populations 
 #' and their parental source populations. Theoretical population biology, 80(3), 208-216.
-
 "nr.observed.alleles.no.extra"
