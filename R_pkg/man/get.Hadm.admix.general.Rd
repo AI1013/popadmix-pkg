@@ -7,9 +7,9 @@
 get.Hadm.admix.general(pops, gamma)
 }
 \arguments{
-\item{pops}{Matrix}
+\item{pops}{A matrix that contains the allele frequencies for each population, for each row, the sum should be 1.}
 
-\item{gamma}{Numeric vectors}
+\item{gamma}{Numeric vectors indictating the proportion of each subpopulation in the mixed population, and the sum should be 1.}
 }
 \value{
 If there are missing values in the inputs, the output will be NA with a warning. If the sums of rows in martix is not

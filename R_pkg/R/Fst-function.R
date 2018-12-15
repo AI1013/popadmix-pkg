@@ -7,8 +7,8 @@
 #' and 2 respectively. Ht is the expected heterozygosity of the overall population, and Hs is
 #' the mean expected heterozygosity across subpopulations.
 
-#' @param pop.1 Numeric vector.
-#' @param pop.2 Numeric vector.
+#' @param pop.1 Numeric vector representing allele frequencies in the same locus for populations 1.
+#' @param pop.2 Numeric vector representing allele frequencies in the same locus for populations 2.
 #' @inheritParams get.het.
 #' @return If all inputs are positive and logical, then the output
 #'   will be an numeric vector. If there are missing values in the
@@ -41,8 +41,8 @@ get.Fst <- function(pop.1, pop.2) {
 #' the expected heterozygosity of the overall population, and Hs is the mean expected
 #' heterozygosity across subpopulations.
 
-#' @param pop.1 Numeric vector.
-#' @param pop.2 Numeric vector.
+#' @param pop.1 Numeric vector representing allele frequencies in the same locus for populations 1.
+#' @param pop.2 Numeric vector representing allele frequencies in the same locus for populations 2.
 #' @param gamma Numeric vector.
 #' @inheritParams get.het.
 #' @return If all inputs are positive and logical, then the output
@@ -81,8 +81,8 @@ get.Fst.admix <- function(pop.1, pop.2, gamma) {
 #' on rows in the matrix is not 1 or the sum of vectors of gamma is not 1, then
 #' cannot use this function
 
-#' @param pops Matirx.
-#' @param gamma Numeric vectors.
+#' @param pops A matirx with K rows and I columns (sums on rows is 1) that contains the allele frequencies for each population.
+#' @param gamma Numeric vectors indictating the proportion of each subpopulation in the mixed population, the sum should be 1.
 #' @inheritParams get.het.
 #' @return If all inputs are positive and logical, then the output
 #'   will be an numeric vector.If there are missing values in the

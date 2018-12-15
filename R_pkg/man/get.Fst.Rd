@@ -7,9 +7,9 @@
 get.Fst(pop.1, pop.2)
 }
 \arguments{
-\item{pop.1}{Numeric vector.}
+\item{pop.1}{Numeric vector representing allele frequencies in the same locus for populations 1.}
 
-\item{pop.2}{Numeric vector.}
+\item{pop.2}{Numeric vector representing allele frequencies in the same locus for populations 2.}
 }
 \value{
 If all inputs are positive and logical, then the output

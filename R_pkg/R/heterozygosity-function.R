@@ -27,8 +27,8 @@ get.het <- function(allele.freq) {
 #' @title Calculate the heterozygosity of the admixed population
 #' @description \code{get.Hadm.admix.general} returns the heterozygosity of the admixed population.
 #' @details The input is a matrix with K rows and I columns (sums on rows is 1), vector of gammas (add up to 1).
-#' @param pops Matrix
-#' @param gamma Numeric vectors
+#' @param pops A matrix that contains the allele frequencies for each population, for each row, the sum should be 1.
+#' @param gamma Numeric vectors indictating the proportion of each subpopulation in the mixed population, and the sum should be 1.
 #' @return If there are missing values in the inputs, the output will be NA with a warning. If the sums of rows in martix is not
 #'   1 or the sum of gamma is not 1, it will stop.
 #' @export get.Hadm.admix.general

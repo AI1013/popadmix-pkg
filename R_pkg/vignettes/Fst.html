@@ -10,7 +10,7 @@
 
 
 
-<meta name="date" content="2018-10-26" />
+<meta name="date" content="2018-12-14" />
 
 <title>Functions for Heterozygosity and F_{st}</title>
 
@@ -138,7 +138,7 @@ $(document).ready(function () {
 <h1 class="title toc-ignore">Functions for Heterozygosity and <span class="math inline">\(F_{st}\)</span></h1>
 <p class="author-name">Simina Boca<span class="affil-mark">1</span> and Guangchuan Ji<span class="affil-mark">2</span></p>
 <p class="author-affiliation"><span class="affil-mark">1</span>Innovation Center for Biomedical Informatics, Georgetown University<br><span class="affil-mark">2</span>Georgetown University</p>
-<h4 class="date"><em>2018-10-26</em></h4>
+<h4 class="date"><em>2018-12-14</em></h4>
 
 </div>
 
@@ -541,8 +541,8 @@ pop2
   
   colnames(gamma) &lt;- paste(&quot;gamma&quot;, 1:3)
   
-  allele.frequencies.no.extra$x &lt;-  as.matrix(allele.frequencies.no.extra[[x]])[1:3,]
-  position &lt;- allele.frequencies.no.extra[&quot;x&quot;]
+  allele.frequencies$x &lt;-  as.matrix(allele.frequencies[[x]])[1:3,]
+  position &lt;- allele.frequencies[&quot;x&quot;]
   
   for(locus in names(position)){
     print(locus)
@@ -757,7 +757,7 @@ pop2
 <div id="example-5" class="section level2">
 <h2><span class="header-section-number">6.1</span> Example</h2>
 <p>For example we can use this function to create the plot about <span class="math inline">\(F_{st}\)</span> at the [GATA101G01] locus and the plot about <span class="math inline">\(H_{adm}\)</span> at the [D2S1399] locus.</p>
-<pre class="r"><code>load(&quot;allele.frequencies.no.extra.RData&quot;)
+<pre class="r"><code>load(&quot;allele.frequencies.RData&quot;)
 plot_HorF(&quot;D2S1399&quot;, y=&quot;Hadm&quot;, breaks = c(0, 0.8371, 0.8504, 0.8578, 0.8620, 0.8661, 0.8702, 0.8741, 0.8781, 1),
           label = c(0, 0.8371, 0.8504, 0.8578, 0.8620, 0.8661, 0.8702, 0.8741, 0.8781))</code></pre>
 <pre><code>[1] &quot;x&quot;

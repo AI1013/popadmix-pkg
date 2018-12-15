@@ -7,9 +7,9 @@
 get.Fst.admix.general(pops, gamma)
 }
 \arguments{
-\item{pops}{Matirx.}
+\item{pops}{A matirx with K rows and I columns (sums on rows is 1) that contains the allele frequencies for each population.}
 
-\item{gamma}{Numeric vectors.}
+\item{gamma}{Numeric vectors indictating the proportion of each subpopulation in the mixed population, the sum should be 1.}
 }
 \value{
 If all inputs are positive and logical, then the output

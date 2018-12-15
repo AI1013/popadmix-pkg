@@ -51,8 +51,8 @@ plot_HorF <- function (x,# x should be a list including the allele frequencies o
   
   colnames(gamma) <- paste("gamma", 1:3)
   
-  allele.frequencies.no.extra$x <-  as.matrix(allele.frequencies.no.extra[[x]])[1:3,]
-  position <- allele.frequencies.no.extra["x"]
+  allele.frequencies$x <-  as.matrix(allele.frequencies[[x]])[1:3,]
+  position <- allele.frequencies["x"]
   
   for(locus in names(position)){
     print(locus)
