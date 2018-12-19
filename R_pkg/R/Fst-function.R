@@ -18,13 +18,14 @@
 #' @references Boca, S. M., & Rosenberg, N. A. (2011). Mathematical properties of Fst between admixed populations 
 #' and their parental source populations. Theoretical population biology, 80(3), 208-216.
 #' @examples
-#' pop.1 <- 0.3
-#' pop.2 <- 0.4
+#' pop.1 <- c(0.3,0.7)
+#' pop.2 <- c(0.4,0.6)
 #' get.Fst(pop.1, pop.2)
 
 get.Fst <- function(pop.1, pop.2) {
-  if (any(is.na(pop.1) == TRUE)) warning("There should not be NA in the pop.1")
-  if (any(is.na(pop.2) == TRUE)) warning("There should not be NA in the pop.2")
+  if (any(is.na(c(pop.1,pop.2)))) warning("There should not be any NAs in the pop.1 or pop.2 vectors")
+  if(any(c(pop.1,pop.2)>1 | c(pop.1,pop.2)<0) stop("Some allele frequencies are above 1 or below 0")  
+  if(any(!isTRUE(all.equal(sum(pop.1),1)),!isTRUE(all.equal(sum(pop.2),1)))) stop("Allele frequencies must add up to 1 for both pop.1 and pop.2")
   meta.pop <- (pop.1 + pop.2)/2
   Ht <- get.het(meta.pop)
   Hs <- mean(c(get.het(pop.1), get.het(pop.2)))
