@@ -27,8 +27,8 @@ and 2 respectively. Ht is the expected heterozygosity of the overall population,
 the mean expected heterozygosity across subpopulations.
 }
 \examples{
-pop.1 <- 0.3
-pop.2 <- 0.4
+pop.1 <- c(0.3,0.7)
+pop.2 <- c(0.4,0.6)
 get.Fst(pop.1, pop.2)
 }
 \references{

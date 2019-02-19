@@ -24,7 +24,7 @@
 
 get.Fst <- function(pop.1, pop.2) {
   if (any(is.na(c(pop.1,pop.2)))) warning("There should not be any NAs in the pop.1 or pop.2 vectors")
-  if(any(c(pop.1,pop.2)>1 | c(pop.1,pop.2)<0) stop("Some allele frequencies are above 1 or below 0")  
+  if(any(c(pop.1,pop.2)>1 | c(pop.1,pop.2)<0)) stop("Some allele frequencies are above 1 or below 0")  
   if(any(!isTRUE(all.equal(sum(pop.1),1)),!isTRUE(all.equal(sum(pop.2),1)))) stop("Allele frequencies must add up to 1 for both pop.1 and pop.2")
   meta.pop <- (pop.1 + pop.2)/2
   Ht <- get.het(meta.pop)
