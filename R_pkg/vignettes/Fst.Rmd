@@ -440,7 +440,7 @@ plot_HorF <- function (x,# x should be a list including the allele frequencies o
 ```
 ## Example
 For example we can use this function to create the plot about $F_{st}$ at the [GATA101G01] locus and the plot about $H_{adm}$ at the [D2S1399] locus.
-```{r, message=FALSE}
+```{r, message=FALSE, results="hide"}
 load("allele.frequencies.RData")
 plot_HorF("D2S1399", y="Hadm", breaks = c(0, 0.8371, 0.8504, 0.8578, 0.8620, 0.8661, 0.8702, 0.8741, 0.8781, 1),
           label = c(0, 0.8371, 0.8504, 0.8578, 0.8620, 0.8661, 0.8702, 0.8741, 0.8781))
@@ -449,3 +449,51 @@ plot_HorF("GATA101G01_12", y="Fst", breaks = c(-1, 0.00018, 0.00086, 0.00242, 0.
           label = c(0, 0.00018, 0.00086, 0.00242, 0.00617, 0.01318, 0.02512, 0.04713, 0.13772))
 ```
 
+# Function to create the allele frequency dataset
+We can use the `get_allele_freq` function to reproduce the allele frequency dataset we use in this package, and also users can use this function to create their own dataset with their own raw data. Notice the input should be a dataset which contains the genotypes for the markers, and the first line should be the name of the markers, and the first column contains the names of the populations, and other columns contain the genotypes.
+```{r}
+get_allele_freq <- function(dataset){
+  
+  cn <- colnames(dataset[2:ncol(dataset)])
+ 
+
+  pop <- unique(dataset[,1])
+  pop <- as.character(pop)
+  rn <- pop
+  if("NATIVE_AMERICA" %in% rn) rn[rn == "NATIVE_AMERICA"] <- "AMERICA"
+  allele_frequencies <- list()
+  
+  for (n in 2:ncol(dataset)) {
+    loci <- unique(dataset[n])
+    loci <- loci[!is.na(loci)]
+    allele_matrix <- NULL
+    
+    for (popname in pop) {
+      subpop <- subset(dataset[n], dataset[1] == popname)
+      subpop <- subpop[!is.na(subpop)]
+      sum_number <- length(subpop)
+      H <- NULL
+      for (ele in loci) {
+        number <- length(unlist(subset(subpop, subpop == ele)))
+        freq <- number / sum_number
+        H <- c(H, freq)
+      }
+      allele_matrix <- rbind(allele_matrix, H)
+    }
+    rownames(allele_matrix) <- rn
+    colnames(allele_matrix) <- loci
+    allele_matrix<- as.matrix(allele_matrix)
+    allele_frequencies[[n-1]] <- allele_matrix
+  }
+  
+  names(allele_frequencies) <- cn
+  allele_frequencies
+  
+}
+```
+##Example
+For example, we can use this function with our raw dataset to get the allele frequenct data we used in this package
+```{r, results="hide"}
+load("dataset_S1.RData")
+get_allele_freq(dataset_S1)
+```

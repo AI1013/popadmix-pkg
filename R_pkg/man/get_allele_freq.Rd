@@ -4,13 +4,20 @@
 \alias{get_allele_freq}
 \title{Create the allele frequency data we use in this package.}
 \usage{
-get_allele_freq()
+get_allele_freq(dataset)
+}
+\arguments{
+\item{dataset}{a dataset which includes the genotypes for different markers of the foure populations.}
 }
 \description{
 \code{get_allele_freq} returns the allele frequency data.
 }
+\details{
+The input dataset should contain the genotypes for the markers, and the first line should be 
+the name of the markers, and the first column contains the names of the populations.
+}
 \examples{
-get_allele_freq()
+get_allele_freq(dataset_S1)
 }
 \references{
 Wang, S., Ray, N., Rojas, W., Parra, M. V., Bedoya, G., Gallo, C., ... & Camrena, B. (2008). 
