@@ -1,5 +1,5 @@
 ---
-title: "Functions for Heterozygosity and $F_{st}$"
+title: "Popadmix"
 author: 
 - name: Simina Boca
   affiliation: 
@@ -14,7 +14,7 @@ output:
     code_folding: hide
   
 vignette: >
-  %\VignetteIndexEntry{"Heterozygosity and $F_{st}$ for admixed populations"}
+  %\VignetteIndexEntry{"Introductions for the functionis in popadmix"}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
