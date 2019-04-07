@@ -11,5 +11,5 @@ To install the package in R, first install the devtools package, and then use th
 
 ```
 library(devtools)
-install_github('AI1013/popadmix-pkg', subdir="R_pkg/", build_vignettes = TRUE)
+install_github('AI1013/popadmix-pkg/R_pkg', build_vignettes = TRUE)
 ```
