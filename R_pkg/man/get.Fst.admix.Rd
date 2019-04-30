@@ -28,8 +28,8 @@ the expected heterozygosity of the overall population, and Hs is the mean expect
 heterozygosity across subpopulations.
 }
 \examples{
-pop.1 <- 0.3
-pop.2 <- 0.4
+pop.1 <- c(0.3, 0.7)
+pop.2 <- c(0.4, 0.6)
 gamma <- 0.25
 get.Fst.admix(pop.1, pop.2, gamma)
 }
