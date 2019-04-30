@@ -54,8 +54,8 @@ get.Fst <- function(pop.1, pop.2) {
 #' @references Boca, S. M., & Rosenberg, N. A. (2011). Mathematical properties of Fst between admixed populations 
 #' and their parental source populations. Theoretical population biology, 80(3), 208-216.
 #' @examples
-#' pop.1 <- 0.3
-#' pop.2 <- 0.4
+#' pop.1 <- c(0.3, 0.7)
+#' pop.2 <- c(0.4, 0.6)
 #' gamma <- 0.25
 #' get.Fst.admix(pop.1, pop.2, gamma)
 
