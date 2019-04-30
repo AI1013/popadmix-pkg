@@ -5,10 +5,9 @@ Authors@R: as.person(c(
     "Simina Boca <smb310@georgetown.edu> [aut, cre]",
     "Guangchuan Ji <gj202@georgetown.edu> [aut]"
   ))
-Description: A package to calculate heterozygosity, Fst and make plots. You can use this package to calculate the 
-    heterozygosity of a population at a locus. Also it can calculate diferent Fst, like between population 1 and 
-    population 2, or between a founder population and the admixed population for the K=2 founder population case
-    or the general case of K founding population. You can use it to produce the related plots in the paper.
+Description: A package to calculate heterozygosity, Fst, and make relevant plots. This package can be used to calculate the 
+    heterozygosity of a population at a locus and the Fst between 2 or more populations. It can also generate triangle plots 
+    for the case of 3 founder populations.
 Depends: R (>= 3.5.0)
 Imports: knitr, rmarkdown, kableExtra, ggtern, ggplot2, RColorBrewer
 License: Artistic-2.0
